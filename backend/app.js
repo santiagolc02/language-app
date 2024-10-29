@@ -1,6 +1,7 @@
 const express = require('express');
 const wordRoutes = require('./routes/wordRoutes');
-const languagesRoutes = require('./routes/languageRoutes');
+const languageRoutes = require('./routes/languageRoutes');
+const lectureRoutes = require('./routes/lectureRoutes');
 require('dotenv').config();
 
 const app = express();
@@ -9,7 +10,8 @@ const app = express();
 app.use(express.json());
 
 app.use('/words', wordRoutes);
-app.use('/languages', languagesRoutes)
+app.use('/languages', languageRoutes)
+app.use('/lectures', lectureRoutes)
 
 // Start the server
 app.listen(process.env.PORT, () => {
