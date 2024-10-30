@@ -2,7 +2,7 @@
     height: 20vh;
     width: 16vw;
     background-color: rgb(75, 75, 75);
-    border-radius: 10px;
+    border-radius: 20px;
     margin: 20px;
     cursor: pointer;
 }
@@ -10,5 +10,5 @@
 .language-img {
     width: 100%;
     height: 100%;
-    border-radius: 10px;
+    border-radius: 20px;
 }
