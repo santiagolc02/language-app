@@ -1,9 +1,13 @@
 import './Language.css'
 
-const Language = ({ props }) => {
+const Language = ({ languageData, setLanguage }) => {
+    const handleClick = () => {
+        setLanguage(languageData.name);
+    }
+
     return (
-        <div className='language'>
-            <img src={`/assets/${props.code}.png`} className='language-img' alt="Example" />
+        <div className='language' onClick={handleClick}>
+            <img src={`/assets/${languageData.code}.png`} className='language-img' alt={`${languageData.name}`} />
         </div>
     )
 }

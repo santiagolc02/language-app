@@ -5,21 +5,20 @@ import Language from './components/language/Language';
 
 function App() {
 	const [languages, setLanguages] = useState([]);
-	const [language, setLanguage] = useState('');
+	const [language, setLanguage] = useState('none');
 
 	useEffect(() => {
         const fetchLanguages = async () => {
             try {
                 const response = await axios.get('http://localhost:3001/languages/'); // Replace with your actual API endpoint
                 setLanguages(response.data);
-				console.log(languages)
             } catch (error) {
                 console.error('Error fetching the languages:', error);
             }
         };
 
         fetchLanguages();
-    }, [languages]);
+    }, []);
 
 	return (
 		<div className="app">
@@ -27,10 +26,11 @@ function App() {
 				<h1>Choose a language...</h1>
 				<br></br>
 				<div className='app-flags'>
-				{languages.map(item => (
-					<Language props={item}></Language>
+				{languages.map((item) => (
+					<Language key={item.code} languageData={item} setLanguage={setLanguage}></Language>
 				))}
 				</div>
+				<p>Selected Language: {language}</p>
 			</div>
 		</div>
 	);
