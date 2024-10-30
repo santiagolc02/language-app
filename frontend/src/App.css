@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: var(--primary-font);
+}
+
+:root {
+    --primary-color: rgb(10, 10, 10);
+    --primary-font: "Mulish", sans-serif;
+    
+}
+
+html, body {
+    background-color: rgb(10, 10, 10);
+    height: 100vh;
+    width: 100vw;
+    /* overflow: hidden; */
+}
+
+.app {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.app-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.app-flags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 95%;
+}
