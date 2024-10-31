@@ -10,7 +10,7 @@ const getAllLectures = async () => {
 
 // Function to get all lectures from a language
 const getLecturesByLanguage = async (language) => {
-  const query = `SELECT l.*, languages.name
+  const query = `SELECT l.*
                 FROM lectures l
                 JOIN languages ON l.language_id = languages.id
                 WHERE languages.name = $1;`;
