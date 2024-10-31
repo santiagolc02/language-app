@@ -1,9 +1,13 @@
 import './Language.css'
+import { useLanguage } from '../../context/LanguageContext';
 
-const Language = ({ languageData, setLanguage }) => {
+const Language = ({ languageData, onClick }) => {
+    const { setLanguage } = useLanguage(); // Get setLanguage from context
+
     const handleClick = () => {
-        setLanguage(languageData.name);
-    }
+        setLanguage(languageData.name); // Set the language in context
+        onClick();
+    };
 
     return (
         <div className='language' onClick={handleClick}>

@@ -1,17 +1,20 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import axios from 'axios'
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import Language from './components/language/Language';
+import Lecture from './components/lecture/Lecture';
 import { useLanguage } from './context/LanguageContext';
 
 function App() {
-	const [languageList, setLanguageList] = useState([]);
-	const { language, setLanguage } = useLanguage(); // Get setLanguage from context
+    const [languageList, setLanguageList] = useState([]);
+    const { setLanguage } = useLanguage(); // Get setLanguage from context
+    const navigate = useNavigate(); // Hook for navigation
 
-	useEffect(() => {
+    useEffect(() => {
         const fetchLanguages = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/languages/'); // Replace with your actual API endpoint
+                const response = await axios.get('http://localhost:3001/languages/'); // API endpoint for languages
                 setLanguageList(response.data);
             } catch (error) {
                 console.error('Error fetching the languages:', error);
@@ -21,20 +24,35 @@ function App() {
         fetchLanguages();
     }, []);
 
-	return (
-		<div className="app">
-			<div className='app-container'>
-				<h1>Choose a language...</h1>
-				<br></br>
-				<div className='app-flags'>
-				{languageList.map((item) => (
-					<Language key={item.code} languageData={item} setLanguage={setLanguage}></Language>
-				))}
-				</div>
-				<p>Selected Language: {language}</p>
-			</div>
-		</div>
-	);
+    // Handle language selection and navigation
+    const handleLanguageClick = (name) => {
+		setLanguage(name); // Set the selected language in context
+        navigate('/lectures'); // Navigate to the Lectures page
+    };
+
+    return (
+            <div className="app">
+                <Routes>
+                    <Route path="/" element={  // Route for the home page
+                        <div className="app-container">
+                            <h1>Choose a language...</h1>
+							<br></br>
+							<br></br>
+                            <div className="app-flags">
+                                {languageList.map((item) => (
+                                    <Language 
+                                        key={item.code} 
+                                        languageData={item} 
+                                        onClick={() => handleLanguageClick(item.name)}  // Pass the click handler
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    } />
+                    <Route path="/lectures" element={<Lecture />} /> {/* Route for the Lectures page */}
+                </Routes>
+            </div>
+    );
 }
 
 export default App;

@@ -5,7 +5,7 @@ const LanguageContext = createContext();
 
 // Provider component to wrap around your app
 export const LanguageProvider = ({ children }) => {
-    const [language, setLanguage] = useState('');
+    const [language, setLanguage] = useState('none');
 
     return (
         <LanguageContext.Provider value={{ language, setLanguage }}>

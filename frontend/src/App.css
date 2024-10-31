@@ -2,12 +2,13 @@
     margin: 0;
     padding: 0;
     font-family: var(--primary-font);
+    font-weight: var(--primary-font-weight);
 }
 
 :root {
     --primary-color: rgb(10, 10, 10);
-    --primary-font: "Mulish", sans-serif;
-    
+    --primary-font: "Montserrat", sans-serif; 
+    --primary-font-weight: 300;
 }
 
 html, body {
