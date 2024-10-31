@@ -1,13 +1,13 @@
-.language {
-    height: 20vh;
-    width: 16vw;
+.flag {
+    height: 21vh;
+    width: 18vw;
     background-color: rgb(75, 75, 75);
     border-radius: 20px;
     margin: 20px;
     cursor: pointer;
 }
 
-.language-img {
+.flag-img {
     width: 100%;
     height: 100%;
     border-radius: 20px;

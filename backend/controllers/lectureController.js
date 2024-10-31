@@ -1,6 +1,7 @@
 // controllers/userController.js
-const { getAllLectures } = require('../models/lectureModel');
+const { getAllLectures, getLecturesByLanguage } = require('../models/lectureModel');
 
+// All lectures
 const getLectures = async (req, res) => {
   try {
     const lectures = await getAllLectures();
@@ -11,4 +12,16 @@ const getLectures = async (req, res) => {
   }
 };
 
-module.exports = { getLectures };
+// All lectures from a language
+const getLecturesLanguage = async (req, res) => {
+  try {
+    const {language} = req.params;
+    const lectures = await getLecturesByLanguage(language);
+    res.json(lectures);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error')
+  }
+}
+
+module.exports = { getLectures, getLecturesLanguage };

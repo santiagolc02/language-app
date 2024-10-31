@@ -2,8 +2,8 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Language from './components/language/Language';
-import Lecture from './components/lecture/Lecture';
+import Flag from './components/flag/Flag';
+import Library from './components/library/Library';
 import { useLanguage } from './context/LanguageContext';
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
     // Handle language selection and navigation
     const handleLanguageClick = (name) => {
 		setLanguage(name); // Set the selected language in context
-        navigate('/lectures'); // Navigate to the Lectures page
+        navigate('/library'); // Navigate to the Lectures page
     };
 
     return (
@@ -40,7 +40,7 @@ function App() {
 							<br></br>
                             <div className="app-flags">
                                 {languageList.map((item) => (
-                                    <Language 
+                                    <Flag 
                                         key={item.code} 
                                         languageData={item} 
                                         onClick={() => handleLanguageClick(item.name)}  // Pass the click handler
@@ -49,7 +49,7 @@ function App() {
                             </div>
                         </div>
                     } />
-                    <Route path="/lectures" element={<Lecture />} /> {/* Route for the Lectures page */}
+                    <Route path="/Library" element={<Library />} /> {/* Route for the Lectures page */}
                 </Routes>
             </div>
     );
