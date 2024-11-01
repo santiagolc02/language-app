@@ -3,7 +3,7 @@ const db = require('../config/db');
 
 // Function to get all lectures
 const getAllLectures = async () => {
-  const query = 'SELECT * FROM lectures';
+  const query = 'SELECT * FROM lectures order by id';
   const result = await db.query(query);
   return result.rows;
 };

@@ -12,7 +12,7 @@ const Flag = ({ languageData, onClick }) => {
 
     return (
         <motion.div className='flag' onClick={handleClick} whileHover={{y: -5}}>
-            <img src={`/assets/${languageData.code}.png`} className='flag-img' alt={`${languageData.name}`} />
+            <img src={`/assets/${languageData.name}.png`} className='flag-img' alt={`${languageData.name}`} />
         </motion.div>
     )
 }
