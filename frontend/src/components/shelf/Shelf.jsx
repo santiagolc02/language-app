@@ -35,9 +35,7 @@ const Shelf = () => {
             ) : lectures.length > 0 ? (
                 lectures.map((lecture) => (
                     <Book key={lecture.id}
-                            LectureData = {lecture}
-                    >
-                        
+                            LectureData = {lecture}>
                     </Book>
                 ))
             ) : (
