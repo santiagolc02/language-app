@@ -4,7 +4,7 @@ import axios from 'axios';
 import Book from '../book/Book';
 import { useLanguage } from '../../context/LanguageContext';
 
-const Shelf = () => {
+const Shelf = ({ setLectureId }) => {
     const [lectures, setLectures] = useState([]);
     const [loading, setLoading] = useState(true);
     const { language } = useLanguage(); // Get setLanguage from context
@@ -14,7 +14,7 @@ const Shelf = () => {
             setLoading(true);
             try {
                 // Make an API call to fetch lectures for the selected language
-                const response = await axios.get(`http://localhost:3001/lectures/${language}`);
+                const response = await axios.get(`http://localhost:3001/lectures/language/${language}`);
                 setLectures(response.data); // Store the lectures data
             } catch (error) {
                 console.error('Error fetching lectures:', error);
@@ -28,7 +28,6 @@ const Shelf = () => {
 
     return (
         <div className="shelf">
-            <h1>Lectures in {language}</h1>
             <br />
             {loading ? (
                 <p>Loading lectures...</p>

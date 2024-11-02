@@ -4,6 +4,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Flag from './components/flag/Flag';
 import Library from './components/library/Library';
+import Reading from './components/reading/Reading';
 import { useLanguage } from './context/LanguageContext';
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
     return (
             <div className="app">
                 <Routes>
-                    <Route path="/" element={  // Route for the home page
+                    <Route path="/" element={
                         <div className="app-container">
                             <h1>Choose a language...</h1>
 							<br></br>
@@ -50,6 +51,7 @@ function App() {
                         </div>
                     } />
                     <Route path="/Library" element={<Library />} /> {/* Route for the Lectures page */}
+                    <Route path="/Reading" element={<Reading />} /> {/* Route for the Reading page */}
                 </Routes>
             </div>
     );

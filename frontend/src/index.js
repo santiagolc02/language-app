@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { LanguageProvider } from './context/LanguageContext';
+import { LectureIdProvider } from './context/LectureContext';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -11,7 +12,9 @@ root.render(
   <React.StrictMode>
     <Router>
       <LanguageProvider>
-        <App />
+        <LectureIdProvider>
+          <App />
+        </LectureIdProvider>
       </LanguageProvider>
     </Router>
   </React.StrictMode>
