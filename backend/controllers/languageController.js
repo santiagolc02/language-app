@@ -1,9 +1,9 @@
 // controllers/userController.js
-const { getAllLanguages } = require('../models/languageModel');
+const { getLanguagesQuery } = require('../models/languageModel');
 
-const getLanguages = async (req, res) => {
+const getLanguagesController = async (req, res) => {
   try {
-    const languages = await getAllLanguages();
+    const languages = await getLanguagesQuery();
     res.json(languages);
   } catch (err) {
     console.error(err);
@@ -11,4 +11,4 @@ const getLanguages = async (req, res) => {
   }
 };
 
-module.exports = { getLanguages };
+module.exports = { getLanguagesController };

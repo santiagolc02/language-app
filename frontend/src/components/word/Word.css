@@ -1,4 +1,4 @@
-.word {
+.unknown-word {
     display: inline;
     width: auto;
     height: auto;
@@ -12,8 +12,26 @@
     border: 0.1px solid transparent;
 }
 
-.word:hover {
+.unknown-word:hover {
     background-color: rgba(43, 0, 255, 0.392);
+    border: 0.1px solid white;
+}
+
+.known-word {
+    display: inline;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    transition: 0.3s ease;
+    padding: 0.2vw;
+    margin-top: 0.8vw;
+    border: 0.1px solid transparent;
+}
+
+.known-word:hover {
     border: 0.1px solid white;
 }
 
