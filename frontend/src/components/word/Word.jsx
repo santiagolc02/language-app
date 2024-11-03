@@ -1,8 +1,12 @@
 import './Word.css'
 
-const Word = ({ word }) => {
+const Word = ({ word, setWord }) => {
+    const handleClick = () => {
+        setWord(word);
+    }
+
     return (
-        <div className='word'>
+        <div className='word' onClick={handleClick}>
             <span className='word-text'>{word}</span>
         </div>
     )

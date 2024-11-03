@@ -9,6 +9,8 @@ const Library = () => {
     return (
         <div className="library">
             <Navbar></Navbar>
+            <br></br>
+            <br></br>
             <h1 style={{marginLeft: '1.2vw'}}>Lectures in {language}</h1>
             <Shelf></Shelf>
             
