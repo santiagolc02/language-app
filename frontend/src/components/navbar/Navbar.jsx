@@ -1,6 +1,6 @@
 import './Navbar.css'
 import { useLanguage } from '../../context/LanguageContext';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const Navbar = () => {
@@ -13,9 +13,13 @@ const Navbar = () => {
 
     return (
         <div className="navbar">
-            <img src={`/assets/${language}.png`} 
-            className='navbar-flag' alt={`${language}`} 
-            onClick={handleClick} />
+            <div className="navbar-buttons">
+                <button className='navbar-button'>Lectures</button>
+                <button className='navbar-button'>Vocabulary</button>
+                <button className='navbar-button'>Coming soon</button>
+            </div>
+            
+            
         </div>
     )
 }

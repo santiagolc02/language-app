@@ -1,9 +1,10 @@
 .book {
-    width: 15vw;
-    height: 22vh;
-    background-color: rgb(0, 0, 0);
+    width: 12vw;
+    height: 15vh;
+    background-color: rgb(20, 20, 20);
     border-radius: 10px;
     cursor: pointer;
+    margin-bottom: 3vw;
 }
 
 .book-img {
@@ -11,10 +12,11 @@
     height: auto;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .book-info {
-    padding-left: 10px;
     display: flex;
     flex-direction: column;
     font-size: 1.5vh;

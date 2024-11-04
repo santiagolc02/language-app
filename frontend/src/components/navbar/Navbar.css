@@ -1,16 +1,24 @@
 .navbar {
     height: 10vh;
     width: 100vw;
-    background-color: rgb(22, 22, 22);
+    background-color: rgb(20, 20, 20);
     display: flex;
+    justify-content: center;
     align-items: center;
 }
 
-.navbar-flag {
+.navbar-buttons {
+    width: 40%;
     height: 70%;
-    width: auto;
-    border-radius: 15px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.navbar-button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 1vw;
     cursor: pointer;
-    margin-right: auto;
-    margin-left: 1.2vw;
 }

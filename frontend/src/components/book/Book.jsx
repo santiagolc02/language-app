@@ -1,6 +1,7 @@
 import './Book.css'
 import { useNavigate } from 'react-router-dom';
 import { useLectureId } from '../../context/LectureContext';
+import { motion } from 'framer-motion';
 
 const Book = ({ LectureData }) => {
     const { setLectureId } = useLectureId(); // Get setLanguage from context
@@ -12,13 +13,13 @@ const Book = ({ LectureData }) => {
     }
 
     return (
-        <div className='book' onClick={handleClick}>
+        <motion.div className='book' onClick={handleClick} whileHover={{ y: -2 }}>
             <img src={`/assets/imgtest.jpg`} alt='' className='book-img'></img>
             <div className="book-info">
                 <p>{LectureData.name}</p>
                 <p>{LectureData.level}</p>
             </div>
-        </div>
+        </motion.div>
     )
 }
 

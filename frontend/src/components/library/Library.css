@@ -1,5 +1,17 @@
 .library {
     width: 100vw;
     height: 100vh;
-    background-color: rgb(35, 35, 35);
+    background-color: rgb(20, 20, 20);
+    box-sizing: border-box;
+}
+
+.library-text-flag {
+    display: flex;
+    align-items: center;
+}
+
+.library-flag {
+    margin-left: 0.5vw;
+    height: 4vh;
+    border-radius: 5px;
 }

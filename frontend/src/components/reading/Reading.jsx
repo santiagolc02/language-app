@@ -26,7 +26,7 @@ const Reading = () => {
 
         const fetchWords = async () => {
             try {
-                const response = await axios.get(`http://localhost:3001/words/`);
+                const response = await axios.get(`http://localhost:3001/words/${language}`);
                 setDbWords(response.data);
             } catch (error) {
                 console.error('Error fetching the words:', error);

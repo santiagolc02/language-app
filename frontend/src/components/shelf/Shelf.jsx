@@ -28,7 +28,6 @@ const Shelf = ({ setLectureId }) => {
 
     return (
         <div className="shelf">
-            <br />
             {loading ? (
                 <p>Loading lectures...</p>
             ) : lectures.length > 0 ? (
