@@ -5,5 +5,6 @@ const wordController = require('../controllers/wordController');
 
 router.get('/', wordController.getWordsContoller);
 router.get('/:language', wordController.getWordsLanguageController)
+router.post('/:language/word', wordController.postWordsLanguageController)
 
 module.exports = router;

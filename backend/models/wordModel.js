@@ -17,5 +17,19 @@ const getWordsLanguageQuery = async (language) => {
   return result.rows;
 };
 
-module.exports = { getWordsQuery,  getWordsLanguageQuery };
+// Function to get all words from a language
+const postWordQuery = async ({ word, mastery, translations, word_type, gender, language }) => {
+  const query = `INSERT INTO words (word, mastery, translations, word_type, gender, language_id)
+                  SELECT $1, $2, $3::jsonb, $4, $5, l.id 
+                  FROM languages l
+                  WHERE l.name = $6
+                  RETURNING *;`;
+
+
+  const values = [word, mastery, translations, word_type, gender, language];                
+  const result = await db.query(query, values);
+  return result.rows[0];
+}; 
+
+module.exports = { getWordsQuery,  getWordsLanguageQuery, postWordQuery };
 
