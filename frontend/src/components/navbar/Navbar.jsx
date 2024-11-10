@@ -1,19 +1,18 @@
 import './Navbar.css'
-import { useLanguage } from '../../context/LanguageContext';
 import { useNavigate } from 'react-router-dom';
 
 
 const Navbar = () => {
-    const { language } = useLanguage(); // Get setLanguage from context
     const navigate = useNavigate(); // Hook for navigation
 
-    const handleClick = () => {
+    const handleBackClick = () => {
         navigate('/');
     }
 
     return (
         <div className="navbar">
             <div className="navbar-buttons">
+                <i className="bi bi-arrow-left" onClick={handleBackClick}></i>
                 <button className='navbar-button'>Lectures</button>
                 <button className='navbar-button'>Vocabulary</button>
                 <button className='navbar-button'>Coming soon</button>

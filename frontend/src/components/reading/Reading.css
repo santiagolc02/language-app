@@ -44,25 +44,108 @@ i {
     gap: 0.5vw;
 }
 
-.reading-info {
+.reading-right {
     height: 100vh;
     width: 30vw;
     background-color:  rgb(22, 22, 22);
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     box-sizing: border-box;
+    /* background-color: navy; */
+    padding: 2vw;
 }
 
-.reading-info-word {
-    height: 10vh;
+.reading-right-word {
+    height: 5%;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 2vw;
-    padding-left: 2vw;
-    padding-right: 2vw;
+    padding-left: 2rem;
+    padding-right: 2rem;
     box-sizing: border-box;
+    /* background-color: purple; */
+}
+
+.reading-right-selects {
+    height: 8%;
+    width: 100%;
+    margin-top: 3%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /* background-color: blue; */
+}
+
+.reading-right-select {
+    height: 2.5rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: #222222;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+}
+
+.reading-select option {
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+
+.reading-right-translations {
+    height: 15%;
+    width: 100%;
+    margin-top: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    /* background-color: green; */
+}
+
+
+.reading-right-translation {
+    width: 100%;
+    height: 50%;
+    /* background-color: aquamarine; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reading-right-flag {
+    width: 3.5vw;
+    height: auto;
+    border-radius: 5px;
+}
+
+.reading-right-translation-input {
+    margin-left: 1vw;
+    height: 45%;
+    width: auto;
+    color: white;
+    background-color: #222222;
+    border: none;
+    border-radius: 5px;
+    border: solid 1px white;
+    padding: 0.1vw 0.4vw;
+}
+
+.reading-right-submit {
+    height: 5vh;
+    width: 100%;
+    margin-top: 3vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bi-cloud-arrow-up {
+    font-size: 2.5vw;
+    cursor: pointer;
 }
 
 /* Style the entire scrollbar */

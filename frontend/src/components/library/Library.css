@@ -8,6 +8,7 @@
 .library-text-flag {
     display: flex;
     align-items: center;
+    margin-top: 5vh;
 }
 
 .library-flag {

@@ -35,6 +35,19 @@
     border: 0.1px solid white;
 }
 
+.plain-text {
+    display: inline;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    color: rgb(255, 0, 0); /* Same color as text to blend in */
+    cursor: default; /* Non-interactive cursor */
+    padding: 0; /* No padding to keep it close to adjacent words */
+    margin: 0; /* No extra spacing around punctuation */
+    border: none; /* No border for punctuation */
+    transition: none; /* No transition effects */
+}
+
 .word-text {
-    font-size: 1.2vw;
+    font-size: 1.2rem;
 }
