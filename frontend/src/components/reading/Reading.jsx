@@ -15,6 +15,7 @@ const Reading = () => {
     const [spanishText, setSpanishText] = useState("");
 
     const [reading, setReading] = useState({});
+    const [processedText, setProcessedText] = useState([])
     const [dbWords, setDbWords] = useState([]);
     const [enums, setEnums] = useState([])
     const { lectureId, setLectureId } = useLectureId();
@@ -26,6 +27,7 @@ const Reading = () => {
             try {
                 const response = await axios.get(`http://localhost:3001/lectures/id/${lectureId}`);
                 setReading(response.data);
+                console.log(reading);
             } catch (error) {
                 console.error('Error fetching the lecture:', error);
             }
@@ -58,7 +60,6 @@ const Reading = () => {
                     masteries: masteries.data,
                     types: types.data
                 });
-                console.log(enums);
             } catch (error) {
                 console.error('Error fetching the lecture:', error);
             }
@@ -67,28 +68,41 @@ const Reading = () => {
         fetchEnums();
     }, [selectedWord])
     
+    useEffect(() => {
+        if (reading.text) {
+            const result = [];
+            let currentIndex = 0;
+            let currentWord = '';
 
-    //const words = reading.text ? reading.text.match(/[\p{L}\p{M}]+(?:['’][\p{L}\p{M}]+)?|[.,!?;:](?=\s|$)/gu): [];
-    //const words = reading.text ? reading.text.match(/\S+/g) : [];
-    //const words = reading.text ? reading.text.split(/[\s.,!?;:()]+/) : [];
-    const processText = (text) => {
-        if (!text) return [];
-        
-        // Universal pattern that matches:
-        // 1. Words in any language (including contractions and hyphenations)
-        // 2. All punctuation and whitespace
-        // \p{L} - any kind of letter from any language
-        // \p{M} - marks that combine with other characters (like accents)
-        // \p{P} - any kind of punctuation
-        // \s - any whitespace
-        const pattern = /([\p{L}\p{M}]+(?:[''][\p{L}\p{M}]+)*(?:-[\p{L}\p{M}]+)*)|([.,!?;:"'()¿¡\p{P}\s]+)/gu;
-        
-        const matches = Array.from(text.matchAll(pattern));
-        return matches.map(match => ({
-            content: match[0],
-            isWord: Boolean(match[1]) // true if it matched a word, false if it matched punctuation/space
-        }));
-    };
+            const isInRegex = (char) => /[\p{L}\u0027\u2019\u002D]/u.test(char);
+
+            const addWord = () => {
+                if (currentWord) {
+                    result.push({ text: currentWord, type: 'word', id: currentIndex });
+                    currentWord = '';
+                }
+            };
+
+            while (currentIndex < reading.text.length) {
+                const char = reading.text[currentIndex];
+                if (isInRegex(char)) {
+                    currentWord += char;
+                } else {
+                    addWord();
+                    if (char === '\n') {
+                        result.push({ text: char, type: 'newline', id: currentIndex });
+                    } else {
+                        result.push({ text: char, type: 'symbol', id: currentIndex });
+                    }
+                }
+                currentIndex++;
+            }
+            addWord();
+
+            console.log('Processed Text:', result); // Should only log once when `reading.text` updates
+            setProcessedText(result);
+        }
+    }, [reading.text]); // Only run when
 
     const handleWordClick = (word) => {
         const wordFound = dbWords.find(dbWord => dbWord.word === word.toLowerCase());
@@ -97,7 +111,6 @@ const Reading = () => {
 
     const handleWordRegistration = async() => {
         try {
-            // Prepare the data to be sent to the backend
             const newWord = {
                 word: selectedWord.word.toLowerCase(),
                 mastery: selectedMastery,
@@ -107,9 +120,9 @@ const Reading = () => {
                 language: language // assuming 'language' is relevant for the word
             };
     
-            // Send a POST request to register the word
             await axios.post(`http://localhost:3001/words/${language}/word`, newWord);
 
+            // Reset all state
             setSelectedGender("");
             setSelectedMastery("");
             setSelectedType("");
@@ -117,7 +130,6 @@ const Reading = () => {
             setSpanishText("");
             setSelectedWord(null)
     
-            // Optionally, you can update the local state to show success feedback
             console.log("Word registered successfully!");
         } catch (error) {
             console.error("Error registering the word:", error);
@@ -140,18 +152,21 @@ const Reading = () => {
                 <br />
                 <br />
                 <div className="reading-text-bottom">
-                    {processText(reading.text).map((item, index) => (
-                        item.isWord ? (
-                            <Word 
-                            key={index} 
-                            word={item.content} 
-                            onWordClick={handleWordClick} 
-                            dbWords={dbWords} />
-
-                        ) : (
-                            <span key={index}>{item.content}</span>
-                        )
-                    ))}
+                    {processedText.map((item, index) =>  {
+                        if (item.type === 'symbol' && item.text === '\n') {
+                            return <br key={index}></br>
+                        } else {
+                            return (
+                                <Word 
+                                key={index} 
+                                word={item.text} 
+                                type={item.type} 
+                                onWordClick={handleWordClick} 
+                                dbWords={dbWords} />
+                            )
+                        }
+                    }
+                    )}
                 </div>
             </div>
             <div className="reading-right">

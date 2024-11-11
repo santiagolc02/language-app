@@ -37,11 +37,9 @@ i {
 
 .reading-text-bottom {
     word-spacing: 7px;
-    line-height: 1; 
+    line-height: 2.5; 
     overflow: auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5vw;
+    display: block;
 }
 
 .reading-right {

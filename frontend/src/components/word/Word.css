@@ -7,7 +7,8 @@
     color: rgb(255, 255, 255);
     cursor: pointer;
     transition: 0.3s ease;
-    padding: 0.2vw;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
     margin-top: 0.8vw;
     border: 0.1px solid transparent;
 }
@@ -26,7 +27,9 @@
     color: rgb(255, 255, 255);
     cursor: pointer;
     transition: 0.3s ease;
-    padding: 0.2vw;
+    /* padding: 0.2vw; */
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
     margin-top: 0.8vw;
     border: 0.1px solid transparent;
 }
@@ -35,17 +38,23 @@
     border: 0.1px solid white;
 }
 
-.plain-text {
+.symbol {
     display: inline;
     width: auto;
     height: auto;
     background-color: transparent;
-    color: rgb(255, 0, 0); /* Same color as text to blend in */
-    cursor: default; /* Non-interactive cursor */
-    padding: 0; /* No padding to keep it close to adjacent words */
-    margin: 0; /* No extra spacing around punctuation */
-    border: none; /* No border for punctuation */
-    transition: none; /* No transition effects */
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    transition: 0.3s ease;
+    padding-top: 0.5em;
+    margin-top: 0.8vw;
+    border: 0.1px solid transparent;
+}
+
+.space {
+    width: 0.5em;
+    display: inline-block;
+    background-color: transparent;
 }
 
 .word-text {
