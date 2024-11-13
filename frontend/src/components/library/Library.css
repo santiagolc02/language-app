@@ -1,18 +1,32 @@
 .library {
     width: 100vw;
     height: 100vh;
-    background-color: rgb(20, 20, 20);
+    background-color: rgb(10, 10, 10);
     box-sizing: border-box;
+    display: flex;
+}
+
+.library-left {
+    width: 75%;
+    height: calc(100vh - 2rem);
+    /* background-color: blue; */
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.library-left-upper {
+    width: 100%;
+    box-sizing: border-box;
+    /* background-color: purple; */
+}
+
+.library-right {
+    width: 25%;
+    /* background-color: green; */
 }
 
 .library-text-flag {
     display: flex;
     align-items: center;
-    margin-top: 5vh;
-}
-
-.library-flag {
-    margin-left: 0.5vw;
-    height: 4vh;
-    border-radius: 5px;
+    margin-top: 3rem;
 }

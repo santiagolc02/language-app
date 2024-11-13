@@ -1,6 +1,7 @@
 import './Library.css'
 import Navbar from '../navbar/Navbar';
 import Shelf from '../shelf/Shelf';
+import BookDesc from '../bookDesc/BookDesc';
 import { useLanguage } from '../../context/LanguageContext';
 
 const Library = () => {
@@ -8,14 +9,18 @@ const Library = () => {
 
     return (
         <div className="library">
-            <Navbar></Navbar>
-            <div className="library-text-flag">
-                <h1 style={{marginLeft: '1.2vw', backgroundColor: `rgb(20, 20, 20)`, fontSize: '1.5vw'}}>Lectures in {language}</h1>
-                <img src={`/assets/${language}.png`} 
-                className='library-flag' alt={`${language}`} />
+            <div className="library-left">
+                <div className="library-left-upper">
+                    <Navbar></Navbar>
+                    <div className="library-text-flag">
+                        <h1 style={{fontSize: '1.2rem'}}>Lectures</h1>
+                    </div>
+                </div>
+                <Shelf></Shelf>
             </div>
-            <br></br>
-            <Shelf></Shelf>
+            <div className="library-right">
+                <BookDesc></BookDesc>
+            </div>
         </div>
     )
 }
