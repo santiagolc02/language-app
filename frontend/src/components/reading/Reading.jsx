@@ -188,7 +188,7 @@ const Reading = () => {
                                     <h1>{selectedWord.word}</h1>
                                 </div>
                                 <br></br>
-                                <p style={{textAlign: 'center'}}>Register word: "{selectedWord.word.toLowerCase()}"</p>
+                                {/* <p style={{textAlign: 'center'}}>Register word: "{selectedWord.word.toLowerCase()}"</p> */}
                                 <div className="reading-right-selects">
                                     <select className='reading-right-select' value={selectedGender} onChange={(e) => setSelectedGender(e.target.value)}>
                                         {enums.genders.map((gender, index) => (
@@ -214,11 +214,11 @@ const Reading = () => {
                                 </div>
                                 <div className="reading-right-translations">
                                     <div className="reading-right-translation">
-                                        <img src={`./assets/english.png`} alt='' className='reading-right-flag'></img>
+                                        <p>English:</p>
                                         <input className='reading-right-translation-input' value={englishText} onChange={(e) => setEnglishText(e.target.value)}></input>
                                     </div>
                                     <div className="reading-right-translation">
-                                        <img src={`./assets/spanish.png`} alt='' className='reading-right-flag'></img>
+                                        <p>Spanish:</p>
                                         <input className='reading-right-translation-input' value={spanishText} onChange={(e)=> setSpanishText(e.target.value)}></input>
                                     </div>
                                 </div>

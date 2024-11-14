@@ -2,6 +2,7 @@ import './Shelf.css'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Book from '../book/Book';
+import BookAdd from '../bookAdd/BookAdd';
 import { useLanguage } from '../../context/LanguageContext';
 
 const Shelf = ({ setLectureId }) => {
@@ -31,13 +32,16 @@ const Shelf = ({ setLectureId }) => {
             {loading ? (
                 <p>Loading lectures...</p>
             ) : lectures.length > 0 ? (
-                lectures.map((lecture) => (
-                    <Book key={lecture.id}
-                            LectureData = {lecture}>
-                    </Book>
-                ))
+                <>
+                    <BookAdd></BookAdd>
+                    {lectures.map((lecture) => (
+                        <Book key={lecture.id}
+                                LectureData = {lecture}>
+                        </Book>
+                    ))}
+                </>
             ) : (
-                <p>No lectures available for this language.</p>
+                <BookAdd></BookAdd>
             )}
         </div>
     )

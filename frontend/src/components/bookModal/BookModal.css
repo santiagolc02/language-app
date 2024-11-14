@@ -1,0 +1,69 @@
+.book-modal-overlay {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's on top */
+}
+
+.book-modal {
+    height: 70vh;
+    width: 70vw;
+    background-color: rgb(41, 41, 41);
+    border-radius: 10px; /* Optional: adds rounded corners */
+    padding: 1rem; /* Optional: adds padding inside the modal */
+    box-sizing: border-box;
+    z-index: 1001;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.book-modal-form {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: 90%;
+    /* background-color: blue; */
+}
+
+.book-modal-name {
+    border-radius: 2px;
+    border: none;
+    width: 30%;
+}
+
+.book-modal-textarea {
+    width: 50%;
+    height: 50%;
+    resize: none;
+    border: none;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+.book-modal-select {
+    width: 30%;
+    font-weight: 500;
+}
+
+.book-modal-select-text {
+    font-weight: 500;
+}
+
+.book-modal-button {
+    width: 10rem;
+    height: 2rem;
+    background-color: #1d1d1d;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}

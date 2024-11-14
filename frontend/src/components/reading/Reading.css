@@ -29,6 +29,11 @@ i {
     align-items: center;
 }
 
+.reading-left-top h1 {
+    width: 70%;
+    text-align: center;
+}
+
 .reading-img {
     width: 8%;
     height: auto;
@@ -54,7 +59,7 @@ i {
 }
 
 .reading-right-word {
-    height: 5%;
+    height: 4%;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -66,7 +71,7 @@ i {
 }
 
 .reading-right-selects {
-    height: 8%;
+    height: 4%;
     width: 100%;
     margin-top: 3%;
     display: flex;
@@ -96,7 +101,7 @@ i {
 .reading-right-translations {
     height: 15%;
     width: 100%;
-    margin-top: 3%;
+    margin-top: 2%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -107,17 +112,11 @@ i {
 
 .reading-right-translation {
     width: 100%;
-    height: 50%;
+    height: 30%;
     /* background-color: aquamarine; */
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.reading-right-flag {
-    width: 3.5vw;
-    height: auto;
-    border-radius: 5px;
 }
 
 .reading-right-translation-input {

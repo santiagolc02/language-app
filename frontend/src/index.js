@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { LanguageProvider } from './context/LanguageContext';
 import { LectureIdProvider } from './context/LectureContext';
+import { ModalProvider } from './context/ModalContext';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -13,7 +14,9 @@ root.render(
     <Router>
       <LanguageProvider>
         <LectureIdProvider>
-          <App />
+          <ModalProvider>
+            <App />
+          </ModalProvider>
         </LectureIdProvider>
       </LanguageProvider>
     </Router>
