@@ -26,7 +26,7 @@ const Book = ({ LectureData }) => {
         <motion.div className='book' onClick={handleClick} whileHover={{ y: -2 }}>
             <img src={thumbnailUrl} alt='' className='book-img'></img>
             <div className="book-info">
-                <p>{LectureData.name}</p>
+                <p className='book-info-title'>{LectureData.name}</p>
                 <p>{LectureData.level}</p>
             </div>
         </motion.div>

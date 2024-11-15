@@ -170,9 +170,11 @@ const Reading = () => {
                 </div>
             </div>
             <div className="reading-right">
+                <div className="reading-right-top">
                     {selectedWord ? (
                         selectedWord.inDatabase ? (
                             <>
+                            <div className="reading-right-top">
                                 <div className="reading-right-word">
                                     <h1>{selectedWord.word}</h1>
                                 </div>
@@ -181,6 +183,7 @@ const Reading = () => {
                                 <p>Word Type: {selectedWord.word_type}</p>
                                 <p>Translations: {JSON.stringify(selectedWord.translations)}</p>
                                 <p>Gender: {selectedWord.gender}</p>
+                            </div>
                             </>
                         ) : (
                             <>
@@ -225,7 +228,6 @@ const Reading = () => {
                                 <div className="reading-right-submit">
                                     <i class="bi bi-cloud-arrow-up" onClick={handleWordRegistration}></i>
                                 </div>
-                                
                             </>
                         )
                     ) : (
@@ -233,6 +235,24 @@ const Reading = () => {
                             <p>Select a word to see details</p>
                         </>
                     )}
+                </div>
+                <div className="reading-right-middle">
+                    <iframe
+                        width="550"
+                        height="340"
+                        src={`https://www.youtube.com/embed/sTl4KWGWWYg`}
+                        frameBorder="0"
+                        allowFullScreen
+                        style={{
+                            width: '80%',
+                            height: '100%',
+                            borderRadius: '10px'
+                        }}
+                    ></iframe>
+                </div>
+                <div className="reading-right-bottom">
+                    <h1>Coming soon...</h1>
+                </div>
             </div>
         </div>
     );

@@ -3,7 +3,7 @@ import './BookDesc.css'
 const BookDesc = () => {
     return (
         <div className="book-desc">
-            <h1>hola</h1>
+            <h1>Coming soon...</h1>
         </div>
     )
 }

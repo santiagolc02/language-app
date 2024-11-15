@@ -16,3 +16,9 @@
     flex-direction: column;
     font-size: 0.8rem;
 }
+
+.book-info-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
