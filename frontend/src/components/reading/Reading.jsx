@@ -27,7 +27,6 @@ const Reading = () => {
             try {
                 const response = await axios.get(`http://localhost:3001/lectures/id/${lectureId}`);
                 setReading(response.data);
-                console.log(reading);
             } catch (error) {
                 console.error('Error fetching the lecture:', error);
             }
@@ -104,6 +103,15 @@ const Reading = () => {
         }
     }, [reading.text]); // Only run when
 
+    const getYtCode = (videoUrl) => {
+        if (!videoUrl || typeof videoUrl !== 'string') {
+            console.error('Invalid video URL:', videoUrl);
+            return ''; // Return an empty string or handle the error as needed
+        }
+        const videoId = videoUrl.split('watch?v=')[1]?.split('&')[0];
+        return videoId || ''; // Ensure a valid ID or an empty string
+    };
+
     const handleWordClick = (word) => {
         const wordFound = dbWords.find(dbWord => dbWord.word === word.toLowerCase());
         setSelectedWord(wordFound ? {...wordFound, word:word, inDatabase:true}: {word, inDatabase:false});
@@ -179,6 +187,8 @@ const Reading = () => {
                                     <h1>{selectedWord.word}</h1>
                                 </div>
                                 <br></br>
+                                <br></br>
+                                <br></br>
                                 <p>Mastery: {selectedWord.mastery}</p>
                                 <p>Word Type: {selectedWord.word_type}</p>
                                 <p>Translations: {JSON.stringify(selectedWord.translations)}</p>
@@ -191,7 +201,7 @@ const Reading = () => {
                                     <h1>{selectedWord.word}</h1>
                                 </div>
                                 <br></br>
-                                {/* <p style={{textAlign: 'center'}}>Register word: "{selectedWord.word.toLowerCase()}"</p> */}
+                                <br></br>
                                 <div className="reading-right-selects">
                                     <select className='reading-right-select' value={selectedGender} onChange={(e) => setSelectedGender(e.target.value)}>
                                         {enums.genders.map((gender, index) => (
@@ -215,16 +225,20 @@ const Reading = () => {
                                         ))}
                                     </select>
                                 </div>
+                                <br />
+                                <br />
                                 <div className="reading-right-translations">
                                     <div className="reading-right-translation">
                                         <p>English:</p>
                                         <input className='reading-right-translation-input' value={englishText} onChange={(e) => setEnglishText(e.target.value)}></input>
                                     </div>
+                                    <br />
                                     <div className="reading-right-translation">
                                         <p>Spanish:</p>
                                         <input className='reading-right-translation-input' value={spanishText} onChange={(e)=> setSpanishText(e.target.value)}></input>
                                     </div>
                                 </div>
+                                <br />
                                 <div className="reading-right-submit">
                                     <i class="bi bi-cloud-arrow-up" onClick={handleWordRegistration}></i>
                                 </div>
@@ -232,21 +246,22 @@ const Reading = () => {
                         )
                     ) : (
                         <>
-                            <p>Select a word to see details</p>
+                            <h3>Select a word to see details</h3>
                         </>
                     )}
                 </div>
                 <div className="reading-right-middle">
                     <iframe
+                        title='Youtube video'
                         width="550"
                         height="340"
-                        src={`https://www.youtube.com/embed/sTl4KWGWWYg`}
+                        src={`https://www.youtube.com/embed/${getYtCode(reading.video_url)}`}
                         frameBorder="0"
                         allowFullScreen
                         style={{
-                            width: '80%',
-                            height: '100%',
-                            borderRadius: '10px'
+                            width: '85%',
+                            height: '90%',
+                            borderRadius: '20px'
                         }}
                     ></iframe>
                 </div>
