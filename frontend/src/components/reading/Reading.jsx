@@ -8,7 +8,7 @@ import Word from '../word/Word';
 
 const Reading = () => {
     const [selectedWord, setSelectedWord] = useState(null);
-    const [selectedGender, setSelectedGender] = useState("Masculine");
+    const [selectedGender, setSelectedGender] = useState("None");
     const [selectedMastery, setSelectedMastery] = useState("Beginner");
     const [selectedType, setSelectedType] = useState("Noun");
     const [englishText, setEnglishText] = useState("");
@@ -189,10 +189,10 @@ const Reading = () => {
                                 <br></br>
                                 <br></br>
                                 <br></br>
+                                <p style={{ textAlign: 'center' }}>Translations: {JSON.stringify(selectedWord.translations)}</p>
+                                <p>Gender: {selectedWord.gender}</p>
                                 <p>Mastery: {selectedWord.mastery}</p>
                                 <p>Word Type: {selectedWord.word_type}</p>
-                                <p>Translations: {JSON.stringify(selectedWord.translations)}</p>
-                                <p>Gender: {selectedWord.gender}</p>
                             </div>
                             </>
                         ) : (
@@ -251,22 +251,26 @@ const Reading = () => {
                     )}
                 </div>
                 <div className="reading-right-middle">
-                    <iframe
-                        title='Youtube video'
-                        width="550"
-                        height="340"
-                        src={`https://www.youtube.com/embed/${getYtCode(reading.video_url)}`}
-                        frameBorder="0"
-                        allowFullScreen
-                        style={{
-                            width: '85%',
-                            height: '90%',
-                            borderRadius: '20px'
-                        }}
-                    ></iframe>
+                    {reading.video_url ? (
+                        <iframe
+                            title='Youtube video'
+                            width="550"
+                            height="340"
+                            src={`https://www.youtube.com/embed/${getYtCode(reading.video_url)}`}
+                            frameBorder="0"
+                            allowFullScreen
+                            style={{
+                                width: '85%',
+                                height: '90%',
+                                borderRadius: '20px'
+                            }}
+                        ></iframe>
+                    ) : (
+                        <h3>No Youtube video</h3>
+                    )}
                 </div>
                 <div className="reading-right-bottom">
-                    <h1>Coming soon...</h1>
+                    <h3>Coming soon</h3>
                 </div>
             </div>
         </div>

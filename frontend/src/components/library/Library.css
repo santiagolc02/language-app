@@ -1,7 +1,7 @@
 .library {
     width: 100vw;
     height: 100vh;
-    background-color: rgb(10, 10, 10);
+    background-color: rgb(15, 15, 15);
     box-sizing: border-box;
     display: flex;
 }

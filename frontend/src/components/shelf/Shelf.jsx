@@ -33,12 +33,12 @@ const Shelf = ({ setLectureId }) => {
                 <p>Loading lectures...</p>
             ) : lectures.length > 0 ? (
                 <>
-                    <BookAdd></BookAdd>
                     {lectures.map((lecture) => (
                         <Book key={lecture.id}
-                                LectureData = {lecture}>
+                        LectureData = {lecture}>
                         </Book>
                     ))}
+                    <BookAdd></BookAdd>
                 </>
             ) : (
                 <BookAdd></BookAdd>

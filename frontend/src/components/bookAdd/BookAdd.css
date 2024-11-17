@@ -1,10 +1,11 @@
 .book-add {
-    width: 100%;
+    width: 70%;
+    aspect-ratio: 1;
     border-radius: 5px;
     cursor: pointer;
     background-color: rgb(52, 52, 52);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 3rem;
+    font-size: 2rem;
 }
