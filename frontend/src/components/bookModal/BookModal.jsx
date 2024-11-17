@@ -4,7 +4,7 @@ import './BookModal.css'
 import { useBookModal } from '../../context/ModalContext';
 import { useLanguage } from '../../context/LanguageContext';
 
-const BookModal = () => {
+const BookModal = ({ updateLectures }) => {
     const { setShowBookModal } = useBookModal(); // Get setLanguage from context
     const [lectureName, setLectureName] = useState("");
     const [lectureText, setLectureText] = useState("");
@@ -45,6 +45,7 @@ const BookModal = () => {
             setLectureLevel("");
             setLectureLink("");
             setShowBookModal(false);
+            updateLectures();
     
             console.log("Lecture registered successfully!");
         } catch (error) {
@@ -56,9 +57,13 @@ const BookModal = () => {
         setShowBookModal(false)
     };
 
+    const handleClick = () => {
+        updateLectures();
+    }
+
     return (
-        <div className="book-modal-overlay" onClick={closeModal}>
-            <div className="book-modal" onClick={(e) => e.stopPropagation()}>
+        <div className="book-modal-overlay" onMouseDown={closeModal}>
+            <div className="book-modal" onMouseDown={(e) => e.stopPropagation()}>
                 <h1 className="book-modal-title">New lecture in {language.toLowerCase()}</h1>
                 <br />
                 <form className='book-modal-form' onSubmit={handleLectureRegistration}>
@@ -92,7 +97,7 @@ const BookModal = () => {
                         onChange={(e) => setLectureLink(e.target.value)}>
                     </input>
                     <br />
-                    <button type='submit' className='book-modal-button'>Submit</button>
+                    <button type='submit' className='book-modal-button' onClick={handleClick}>Submit</button>
                 </form>
             </div>
         </div>
