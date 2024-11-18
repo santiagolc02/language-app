@@ -54,17 +54,17 @@ i {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     box-sizing: border-box;
+    padding: 2rem;
 }
 
 .reading-right-top {
     height: 33.3%;
     width: 100%;
     /* background-color: blue; */
-    padding: 2rem;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: top;
     align-items: center;
 }
 

@@ -64,7 +64,7 @@ const BookModal = ({ updateLectures }) => {
     return (
         <div className="book-modal-overlay" onMouseDown={closeModal}>
             <div className="book-modal" onMouseDown={(e) => e.stopPropagation()}>
-                <h1 className="book-modal-title">New lecture in {language.toLowerCase()}</h1>
+                <h1 className="book-modal-title">New lecture in {language.toLowerCase()}: {lectureName}</h1>
                 <br />
                 <form className='book-modal-form' onSubmit={handleLectureRegistration}>
                     <label className='book-modal-label'>Title</label>
@@ -82,6 +82,7 @@ const BookModal = ({ updateLectures }) => {
                     </textarea>
                     <br />
 
+                    <label className='book-modal-label'>Level</label>
                     <select className='book-modal-select' value={lectureLevel} onChange={(e) => setLectureLevel(e.target.value)}>
                         {levels.map((level, index) => (
                             <option key={index} value={level.enumlabel} className='book-modal-select-text'>
@@ -91,7 +92,7 @@ const BookModal = ({ updateLectures }) => {
                     </select>
                     <br />
 
-                    <label className='book-modal-label'>Link</label>
+                    <label className='book-modal-label'>Youtube Link</label>
                     <input className='book-modal-link'
                         value={lectureLink} 
                         onChange={(e) => setLectureLink(e.target.value)}>

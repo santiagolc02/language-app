@@ -15,7 +15,7 @@
 
 .book-modal {
     height: 70vh;
-    width: 70vw;
+    width: 40vw;
     background-color: rgb(41, 41, 41);
     border-radius: 10px; /* Optional: adds rounded corners */
     padding: 1rem; /* Optional: adds padding inside the modal */
@@ -35,23 +35,27 @@
 }
 
 .book-modal-name {
-    border-radius: 2px;
     border: none;
-    width: 30%;
+    width: 70%;
+    font-weight: 500;
+    padding: 0.2rem;
+    border-radius: 5px;
 }
 
 .book-modal-textarea {
-    width: 50%;
+    width: 70%;
     height: 50%;
     resize: none;
     border: none;
     border-radius: 5px;
     font-weight: 500;
+    padding: 0.2rem;
 }
 
 .book-modal-select {
-    width: 30%;
+    width: 10%;
     font-weight: 500;
+    padding: 0.2rem;
 }
 
 .book-modal-select-text {
@@ -66,4 +70,12 @@
     color: white;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.book-modal-link {
+    font-weight: 500;
+    width: 70%;
+    padding: 0.2rem;
+    border-radius: 5px;
+    border: none;
 }

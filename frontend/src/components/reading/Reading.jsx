@@ -254,14 +254,12 @@ const Reading = () => {
                     {reading.video_url ? (
                         <iframe
                             title='Youtube video'
-                            width="550"
-                            height="340"
                             src={`https://www.youtube.com/embed/${getYtCode(reading.video_url)}`}
                             frameBorder="0"
                             allowFullScreen
                             style={{
-                                width: '85%',
-                                height: '90%',
+                                width: '100%',
+                                aspectRatio: '16/9',
                                 borderRadius: '20px'
                             }}
                         ></iframe>

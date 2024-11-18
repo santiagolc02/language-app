@@ -13,6 +13,7 @@ const Library = () => {
     const { showBookModal } = useBookModal(); // Get setLanguage from context
     const [lectures, setLectures] = useState([])
     const [loading, setLoading] = useState(true);
+    const [libraryState, setLibraryState] = useState("Lectures");
 
     useEffect(() => {
         fetchLectures()

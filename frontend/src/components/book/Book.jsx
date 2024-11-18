@@ -1,7 +1,6 @@
 import './Book.css'
 import { useNavigate } from 'react-router-dom';
 import { useLectureId } from '../../context/LectureContext';
-import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 
 const Book = ({ LectureData }) => {
@@ -23,13 +22,13 @@ const Book = ({ LectureData }) => {
     const thumbnailUrl = LectureData.video_url ? getThumbnailUrl(LectureData.video_url) : `/assets/${language}.png`;
 
     return (
-        <motion.div className='book' onClick={handleClick} whileHover={{ y: -2 }}>
+        <div className='book' onClick={handleClick}>
             <img src={thumbnailUrl} alt='' className='book-img'></img>
             <div className="book-info">
                 <p className='book-info-title'>{LectureData.name}</p>
                 <p>{LectureData.level}</p>
             </div>
-        </motion.div>
+        </div>
     )
 }
 
