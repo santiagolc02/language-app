@@ -1,7 +1,7 @@
 .book-add {
     width: 75%;
     aspect-ratio: 1;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     background-color: rgb(52, 52, 52);
     display: flex;
