@@ -25,9 +25,9 @@ const Word = ({ word, type, onWordClick, dbWords }) => {
             wordClass = '';
     }
 
-    const handleClick = () => {
+    const handleClick = (e) => {
         if (type === 'word') {
-            onWordClick(word);
+            onWordClick(word, e);
         }
     }
 

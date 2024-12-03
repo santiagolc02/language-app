@@ -5,6 +5,7 @@ import { useLectureId } from '../../context/LectureContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Word from '../word/Word';
+import WordTooltip from '../wordToolTip/WordTooltip';
 
 const Reading = () => {
     const [selectedWord, setSelectedWord] = useState(null);
@@ -18,6 +19,13 @@ const Reading = () => {
     const [processedText, setProcessedText] = useState([])
     const [dbWords, setDbWords] = useState([]);
     const [enums, setEnums] = useState([])
+
+    const [tooltip, setTooltip] = useState({
+        visible: false,
+        content: selectedWord,
+        position: { x: 0, y: 0 },
+    });
+
     const { lectureId, setLectureId } = useLectureId();
     const { language } = useLanguage();
     const navigate = useNavigate();
@@ -112,9 +120,29 @@ const Reading = () => {
         return videoId || ''; // Ensure a valid ID or an empty string
     };
 
-    const handleWordClick = (word) => {
+    const handleWordClick = (word, e) => {
         const wordFound = dbWords.find(dbWord => dbWord.word === word.toLowerCase());
-        setSelectedWord(wordFound ? {...wordFound, word:word, inDatabase:true}: {word, inDatabase:false});
+
+        // Set the selected word state
+        setSelectedWord(
+            wordFound 
+                ? { ...wordFound, word, inDatabase: true } 
+                : { word, inDatabase: false }
+        );
+
+        // Get the clicked word's position
+        const rect = e.target.getBoundingClientRect();
+        // Set the tooltip state
+        setTooltip({
+            visible: true,
+            content: wordFound 
+                ? { ...wordFound, word, inDatabase: true } 
+                : { word, inDatabase: false },
+            position: {
+                x: rect.right + window.scrollX + 8,  // Horizontal position (with scroll offset)
+                y: rect.bottom + window.scrollY - 60 // Vertical position (below the word, with scroll offset)
+        },
+    });
     }
 
     const handleWordRegistration = async() => {
@@ -169,7 +197,7 @@ const Reading = () => {
                                 key={index} 
                                 word={item.text} 
                                 type={item.type} 
-                                onWordClick={handleWordClick} 
+                                onWordClick={(word, e) => handleWordClick(word, e)} 
                                 dbWords={dbWords} />
                             )
                         }
@@ -182,42 +210,43 @@ const Reading = () => {
                     {selectedWord ? (
                         selectedWord.inDatabase ? (
                             <>
-                            <div className="reading-right-top">
-                                <div className="reading-right-word">
-                                    <h1>{selectedWord.word}</h1>
-                                </div>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <p style={{ textAlign: 'center' }}>Translations: {JSON.stringify(selectedWord.translations)}</p>
-                                <p>Gender: {selectedWord.gender}</p>
-                                <p>Mastery: {selectedWord.mastery}</p>
-                                <p>Word Type: {selectedWord.word_type}</p>
-                            </div>
+                                {tooltip.visible && (
+                                    <WordTooltip
+                                        position={tooltip.position}
+                                        content={tooltip.content}
+                                        onClose={() => setTooltip({ ...tooltip, visible: false })}
+                                    />
+                                )}
                             </>
+                                
+                            
                         ) : (
                             <>
                                 <div className="reading-right-word">
                                     <h1>{selectedWord.word}</h1>
                                 </div>
-                                <br></br>
-                                <br></br>
                                 <div className="reading-right-selects">
-                                    <select className='reading-right-select' value={selectedGender} onChange={(e) => setSelectedGender(e.target.value)}>
+                                    <select className='reading-right-select' 
+                                    value={selectedGender} 
+                                    onChange={(e) => setSelectedGender(e.target.value)}>
                                         {enums.genders.map((gender, index) => (
                                             <option key={index} value={gender.enumlabel}>
                                                 {gender.enumlabel}
                                             </option>
                                         ))}
                                     </select>
-                                    <select className='reading-right-select' value={selectedMastery} onChange={(e) => setSelectedMastery(e.target.value)}>
+                                    <select className='reading-right-select' 
+                                    value={selectedMastery} 
+                                    onChange={(e) => setSelectedMastery(e.target.value)}>
                                         {enums.masteries.map((mastery, index) => (
                                             <option key={index} value={mastery.enumlabel}>
                                                 {mastery.enumlabel}
                                             </option>
                                         ))}
                                     </select>
-                                    <select className='reading-right-select' value={selectedType} onChange={(e) => setSelectedType(e.target.value)}>
+                                    <select className='reading-right-select' 
+                                    value={selectedType} 
+                                    onChange={(e) => setSelectedType(e.target.value)}>
                                         {enums.types.map((type, index) => (
                                             <option key={index} value={type.enumlabel}>
                                                 {type.enumlabel}
@@ -225,20 +254,30 @@ const Reading = () => {
                                         ))}
                                     </select>
                                 </div>
-                                <br />
-                                <br />
                                 <div className="reading-right-translations">
                                     <div className="reading-right-translation">
-                                        <p>English:</p>
-                                        <input className='reading-right-translation-input' value={englishText} onChange={(e) => setEnglishText(e.target.value)}></input>
+                                        <input
+                                            id="englishText"
+                                            className="reading-right-translation-input"
+                                            value={englishText}
+                                            onChange={(e) => setEnglishText(e.target.value)}
+                                            placeholder=" " /* Required for :not(:placeholder-shown) */
+                                            required
+                                        />
+                                        <label className="reading-right-translation-label">English:</label>
                                     </div>
-                                    <br />
                                     <div className="reading-right-translation">
-                                        <p>Spanish:</p>
-                                        <input className='reading-right-translation-input' value={spanishText} onChange={(e)=> setSpanishText(e.target.value)}></input>
+                                        <input
+                                            id="spanishText"
+                                            className="reading-right-translation-input"
+                                            value={spanishText}
+                                            onChange={(e) => setSpanishText(e.target.value)}
+                                            placeholder=" " /* Required for :not(:placeholder-shown) */
+                                            required
+                                        />
+                                        <label className="reading-right-translation-label">Spanish:</label>
                                     </div>
                                 </div>
-                                <br />
                                 <div className="reading-right-submit">
                                     <i class="bi bi-cloud-arrow-up" onClick={handleWordRegistration}></i>
                                 </div>
