@@ -13,7 +13,7 @@ const Library = () => {
     const { showBookModal } = useBookModal(); // Get setLanguage from context
     const [lectures, setLectures] = useState([])
     const [loading, setLoading] = useState(true);
-    const [libraryState, setLibraryState] = useState("Lectures");
+    const [libraryState, setLibraryState] = useState("lectures");
 
     useEffect(() => {
         fetchLectures()
@@ -43,13 +43,23 @@ const Library = () => {
             )}
             <div className="library">
                 <div className="library-left">
-                    <div className="library-left-upper">
-                        <Navbar></Navbar>
-                        <div className="library-text-flag">
-                            <h1 style={{fontSize: '1.2rem'}}>Lectures in {language}</h1>
-                        </div>
-                    </div>
-                    <Shelf lectures={lectures} loading={loading}></Shelf>
+                    <Navbar libraryState={libraryState} 
+                    setLibraryState={setLibraryState}></Navbar>
+
+                    {libraryState === 'lectures' ? (
+                        <>
+                            <div className="library-left-upper">
+                                <div className="library-text-flag">
+                                    <h1 style={{fontSize: '1.2rem'}}>Lectures in {language}</h1>
+                                </div>
+                            </div>
+                            <Shelf lectures={lectures} loading={loading}></Shelf>
+                        </>
+                    ) : (
+                        <>
+                        <h1>Coming soon...</h1>
+                        </>
+                    )}
                 </div>
                 <div className="library-right">
                     <BookDesc></BookDesc>

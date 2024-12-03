@@ -1,7 +1,7 @@
 .word-tooltip {
-    width: 10rem;
-    height: 5rem;
-    background-color: #001c58; /* Dark background */
+    width: auto;
+    height: auto;
+    background-color: #414141; /* Dark background */
     color: #fff;
     padding: 10px;
     border-radius: 8px;
@@ -9,6 +9,5 @@
     z-index: 10;
     max-width: 200px;
     font-size: 14px;
-    pointer-events: none;
     white-space: nowrap;
     }

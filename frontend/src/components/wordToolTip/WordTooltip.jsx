@@ -18,7 +18,8 @@ const Tooltip = ({ position, content, onClose }) => {
         >
             <div className="tooltip-content">
                 <>
-                    {/* <p><strong>Word:</strong> {content.word}</p> */}
+                    <h2>{content.word}</h2>
+                    <br />
                     <p><strong>English:</strong> {English}</p>
                     <p><strong>Spanish:</strong> {Spanish}</p>
                 </>  
