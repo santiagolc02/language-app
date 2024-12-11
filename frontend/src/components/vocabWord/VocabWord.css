@@ -1,0 +1,16 @@
+.vocab-word {
+    width: 100%;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(42, 42, 42);
+    border-radius: 5px;
+    flex-shrink: 0;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.vocab-word:hover {
+    background-color: rgb(72, 72, 72);
+}

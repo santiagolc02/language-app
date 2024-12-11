@@ -59,4 +59,5 @@
 
 .word-text {
     font-size: 1.1rem;
+    user-select: none; /* Prevent text selection */
 }

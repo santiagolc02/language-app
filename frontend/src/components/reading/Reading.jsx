@@ -134,19 +134,24 @@ const Reading = () => {
         const rect = e.target.getBoundingClientRect();
         // Set the tooltip state
         setTooltip({
-            visible: true,
+            visible: !tooltip.visible,
             content: wordFound 
                 ? { ...wordFound, word, inDatabase: true } 
                 : { word, inDatabase: false },
             position: {
-                x: rect.right + window.scrollX + 8,  // Horizontal position (with scroll offset)
+                x: rect.right + window.scrollX + 2,  // Horizontal position (with scroll offset)
                 y: rect.bottom + window.scrollY - 60 // Vertical position (below the word, with scroll offset)
-        },
-    });
+            },
+        });
     }
 
     const handleWordRegistration = async() => {
         try {
+            if (!spanishText.trim() && !englishText.trim()) {
+                alert("At least one translation (English or Spanish) must be provided.");
+                return; // Stop execution if both are empty
+            }
+
             const newWord = {
                 word: selectedWord.word.toLowerCase(),
                 mastery: selectedMastery,
@@ -159,9 +164,9 @@ const Reading = () => {
             await axios.post(`http://localhost:3001/words/${language}/word`, newWord);
 
             // Reset all state
-            setSelectedGender("");
-            setSelectedMastery("");
-            setSelectedType("");
+            setSelectedGender("None");
+            setSelectedMastery("Novice");
+            setSelectedType("Noun");
             setEnglishText("");
             setSpanishText("");
             setSelectedWord(null)
@@ -223,7 +228,7 @@ const Reading = () => {
                         ) : (
                             <>
                                 <div className="reading-right-word">
-                                    <h1>{selectedWord.word}</h1>
+                                    <h2>{selectedWord.word}</h2>
                                 </div>
                                 <div className="reading-right-selects">
                                     <select className='reading-right-select' 
@@ -262,6 +267,7 @@ const Reading = () => {
                                             value={englishText}
                                             onChange={(e) => setEnglishText(e.target.value)}
                                             placeholder=" " /* Required for :not(:placeholder-shown) */
+                                            autoComplete='off'
                                             required
                                         />
                                         <label className="reading-right-translation-label">English:</label>
@@ -273,13 +279,16 @@ const Reading = () => {
                                             value={spanishText}
                                             onChange={(e) => setSpanishText(e.target.value)}
                                             placeholder=" " /* Required for :not(:placeholder-shown) */
+                                            autoComplete='off'
                                             required
                                         />
                                         <label className="reading-right-translation-label">Spanish:</label>
                                     </div>
                                 </div>
                                 <div className="reading-right-submit">
-                                    <i class="bi bi-cloud-arrow-up" onClick={handleWordRegistration}></i>
+                                    <button className='reading-right-submit-button' onClick={handleWordRegistration}>
+                                        Upload word
+                                    </button>
                                 </div>
                             </>
                         )

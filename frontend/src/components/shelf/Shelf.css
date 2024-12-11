@@ -1,6 +1,7 @@
 .shelf {
     width: 100%;
-    height: calc(75vh - 1.2rem);
+    /* height: calc(82vh - 1.2rem); */
+    height: auto;
     padding-top: 1rem;
     box-sizing: border-box;
     display: grid;
@@ -8,6 +9,7 @@
     align-content: baseline;
     gap: 1.5rem;
     overflow-y: auto;
+    /* background-color: green; */
 }
 
 /* .shelf {

@@ -7,17 +7,17 @@
 }
 
 .library-left {
-    width: 75%;
+    width: 100%;
     height: calc(100vh - 2rem);
     /* background-color: blue; */
     padding: 2rem;
     box-sizing: border-box;
 }
 
-.library-left-upper {
+.library-middle {
+    height: 3rem;
     width: 100%;
-    box-sizing: border-box;
-    /* background-color: purple; */
+    /* background-color: blue; */
 }
 
 .library-right {
@@ -26,7 +26,86 @@
 }
 
 .library-text-flag {
+    height: 3rem;
+    width: 90%;
     display: flex;
     align-items: center;
-    margin-top: 3rem;
+    background-color: green;
+    
+}
+
+.library-vocabulary {
+    height: calc(82vh - 1.2rem);
+    padding-top: 1rem;
+    /* background-color: blue; */
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+}
+
+.library-vocabulary-text-left {
+    display: inline-block;
+    background-color: rgb(198, 19, 19);
+    padding: 0.5rem;
+    box-sizing: border-box;
+    border-radius: 8px;
+    font-weight: 400;
+}
+
+.library-vocabulary-text-middle {
+    display: inline-block;
+    background-color: rgb(235, 184, 0);
+    padding: 0.5rem;
+    box-sizing: border-box;
+    border-radius: 8px;
+    color: black;
+    font-weight: 400;
+}
+
+.library-vocabulary-text-right {
+    display: inline-block;
+    background-color: rgb(82, 235, 0);
+    padding: 0.5rem;
+    box-sizing: border-box;
+    border-radius: 8px;
+    color: black;
+    font-weight: 400;
+}
+
+.library-vocabulary-left {
+    width: 32%;
+    height: 100%;
+    /* background-color: purple; */
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.library-vocabulary-middle {
+    width: 32%;
+    height: 100%;
+    /* background-color: rgb(62, 62, 62); */
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.library-vocabulary-right {
+    width: 32%;
+    height: 100%;
+    /* background-color: rgb(96, 96, 96); */
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    /* background-color: red; */
+}
+
+.library-vocabulary-words {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+    /* background-color: rgb(16, 232, 16); */
 }

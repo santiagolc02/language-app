@@ -3,6 +3,7 @@ import axios from 'axios';
 import './BookModal.css'
 import { useBookModal } from '../../context/ModalContext';
 import { useLanguage } from '../../context/LanguageContext';
+import { motion } from 'framer-motion';
 
 const BookModal = ({ updateLectures }) => {
     const { setShowBookModal } = useBookModal(); // Get setLanguage from context
@@ -63,7 +64,8 @@ const BookModal = ({ updateLectures }) => {
 
     return (
         <div className="book-modal-overlay" onMouseDown={closeModal}>
-            <div className="book-modal" onMouseDown={(e) => e.stopPropagation()}>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} 
+            className="book-modal" onMouseDown={(e) => e.stopPropagation()}>
                 <h1 className="book-modal-title">New lecture in {language.toLowerCase()}: {lectureName}</h1>
                 <br />
                 <form className='book-modal-form' onSubmit={handleLectureRegistration}>
@@ -100,7 +102,7 @@ const BookModal = ({ updateLectures }) => {
                     <br />
                     <button type='submit' className='book-modal-button' onClick={handleClick}>Submit</button>
                 </form>
-            </div>
+            </motion.div>
         </div>
     )
 }

@@ -12,7 +12,8 @@ const getWordsLanguageQuery = async (language) => {
   const query = `SELECT w.*
                   FROM words w
                   JOIN languages l ON w.language_id = l.id
-                  WHERE l.name = $1`;
+                  WHERE l.name = $1
+                  ORDER BY w.id DESC`;
   const result = await db.query(query, [language]);
   return result.rows;
 };
