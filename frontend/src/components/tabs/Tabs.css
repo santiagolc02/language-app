@@ -1,0 +1,81 @@
+.body {
+  --radius: 8px;
+  --border: 4px;
+  --height: 40px;
+  --speed: 0.25s;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  font-family: "SF Pro Text", "SF Pro Icons", "AOS Icons", "Helvetica Neue",
+    Helvetica, Arial, sans-serif, system-ui;
+}
+
+.tabs {
+  height: var(--height);
+  width: 100%;
+  display: grid;
+  grid-auto-flow: column;
+  background: hsl(0, 0%, 12%);
+  border-radius: var(--radius);
+  grid-auto-columns: 1fr;
+  position: relative;
+  /* border: var(--border) solid hsl(0 0% 0%); */
+}
+
+.tabs > .input,
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.tabs.active-1::after {
+  --active: 0;
+}
+.tabs.active-2::after {
+  --active: 1;
+}
+
+.tabs .label {
+  /* padding: 1em; */
+  cursor: pointer;
+  text-align: center;
+  /* height: 100%; */
+  width: 100%;
+  display: grid;
+  border-radius: calc(var(--radius) - var(--border));
+  place-items: center;
+  color: white;
+  transition: background, color;
+  transition-duration: 0.25s;
+  transition-timing-function: var(--ease, ease);
+  font-weight: 400;
+}
+
+.input:not(:checked) + .label:hover {
+  --highlight: 0.35;
+  background: rgb(46, 46, 46);
+}
+
+.tabs::after {
+  pointer-events: none;
+  content: "";
+  width: calc(100% / var(--count));
+  height: 100%;
+  background: rgb(93, 93, 93);
+  position: absolute;
+  border-radius: calc(var(--radius) - var(--border));
+  mix-blend-mode:lighten;
+  translate: calc(var(--active, 0) * 100%) 0;
+  transition: translate, outline-color;
+  transition-duration: var(--speed);
+  transition-timing-function: var(--ease, ease);
+  outline: 10px solid transparent;
+}

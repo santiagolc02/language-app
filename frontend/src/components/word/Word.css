@@ -27,7 +27,6 @@
     color: rgb(255, 255, 255);
     cursor: pointer;
     transition: 0.3s ease;
-    /* padding: 0.2vw; */
     padding-top: 0.2em;
     padding-bottom: 0.2em;
     margin-top: 0.8vw;
@@ -60,4 +59,24 @@
 .word-text {
     font-size: 1.1rem;
     user-select: none; /* Prevent text selection */
+}
+
+.dbWord {
+    /* display: block; */
+    width: auto;
+    height: 1.2rem;
+    background-color: rgba(200, 200, 200, 0.24);
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    transition: 0.3s ease;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    margin-top: 0.8vw;
+    border: 0.1px solid transparent;
+}
+
+.dbWord:hover {
+    background-color: rgba(13, 20, 231, 0.392);
+    border: 0.1px solid white;
 }

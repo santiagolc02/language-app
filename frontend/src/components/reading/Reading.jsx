@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Word from '../word/Word';
 import WordTooltip from '../wordToolTip/WordTooltip';
+import Tabs from '../tabs/Tabs';
 
 const Reading = () => {
     const [selectedWord, setSelectedWord] = useState(null);
@@ -14,6 +15,10 @@ const Reading = () => {
     const [selectedType, setSelectedType] = useState("Noun");
     const [englishText, setEnglishText] = useState("");
     const [spanishText, setSpanishText] = useState("");
+    const [tab, setTab] = useState('vocabulary');
+    const [searchVocabText, setSearchVocabText] = useState("")
+    const [vocabularyState, setVocabularyState] = useState("all");
+    const [vocabularyWord, setVocabularyWord] = useState([]);
 
     const [reading, setReading] = useState({});
     const [processedText, setProcessedText] = useState([])
@@ -121,6 +126,7 @@ const Reading = () => {
     };
 
     const handleWordClick = (word, e) => {
+        console.log(`word, ${word}`)
         const wordFound = dbWords.find(dbWord => dbWord.word === word.toLowerCase());
 
         // Set the selected word state
@@ -144,6 +150,26 @@ const Reading = () => {
             },
         });
     }
+
+    const handleVocabularyClick = (word, e) => {
+        if (!word) return; // Ensure word is defined
+        setVocabularyState('single');
+        
+        const vocabFound = dbWords.find(dbWord => 
+            dbWord.word?.toLowerCase() === word.toLowerCase()
+        );
+        
+        if (vocabFound) {
+            setVocabularyWord(vocabFound);
+            // console.log(vocabFound.gender)
+        } else {
+            console.warn(`Word "${word}" not found in the database.`);
+        }
+    };
+
+    const filteredVocabulary = dbWords.filter(word =>
+        word.word.toLowerCase().includes(searchVocabText)
+    );
 
     const handleWordRegistration = async() => {
         try {
@@ -223,8 +249,6 @@ const Reading = () => {
                                     />
                                 )}
                             </>
-                                
-                            
                         ) : (
                             <>
                                 <div className="reading-right-word">
@@ -316,7 +340,48 @@ const Reading = () => {
                     )}
                 </div>
                 <div className="reading-right-bottom">
-                    <h3>Coming soon</h3>
+                    <Tabs tab={tab} setTab={setTab}></Tabs>
+                    {tab === 'vocabulary' ? (
+                        <div className="reading-right-buttom-vocabulary">
+                            {vocabularyState === 'all' ? (
+                                <>
+                                    <input
+                                        className='input-vocabulary'
+                                        placeholder='Search'
+                                        value={searchVocabText}
+                                        onChange={(e) => setSearchVocabText(e.target.value)}>
+                                    </input>
+                                    <div className="reading-right-button-words">
+                                        {filteredVocabulary.map((item, index) => (
+                                            <Word 
+                                            key={index}
+                                            word={item.word} 
+                                            type={item.word_type} 
+                                            onWordClick={(word, e) => handleWordClick(word, e)} 
+                                            onVocabularyClick={(word, e) => handleVocabularyClick(word, e)}
+                                            dbWords={dbWords} />
+                                        ))}
+                                    </div>
+                                </>
+                                ) : (
+                                    <div className='reading-right-button-word'>
+                                        <div className="reading-right-button-word-title">
+                                            <i class="bi bi-arrow-left" onClick={() => setVocabularyState('all')}></i>
+                                            <h2>{vocabularyWord.word}</h2>
+                                            <i class="bi bi-arrow-left" style={{color: 'rgb(15, 15, 15)'}}></i>
+                                        </div>
+                                        <br />
+                                        <div className="reading-right-button-word-info">
+                                            <p>{`English: ${vocabularyWord.translations.English}`}</p>
+                                            <p>{`Spanish: ${vocabularyWord.translations.Spanish}`}</p>
+                                        </div>
+                                    </div>
+                                    )}
+                        </div>
+                    ) : (
+                        <div className="reading-right-buttom-add">
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

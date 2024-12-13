@@ -1,6 +1,6 @@
 import './Word.css';
 
-const Word = ({ word, type, onWordClick, dbWords }) => {
+const Word = ({ word, type, onWordClick, onVocabularyClick, dbWords }) => {
     let isInDatabase = false;
     let wordClass = '';
 
@@ -22,12 +22,14 @@ const Word = ({ word, type, onWordClick, dbWords }) => {
             wordClass = isInDatabase ? 'known-word' : 'unknown-word';
             break;
         default:
-            wordClass = '';
+            wordClass = 'dbWord';
     }
 
     const handleClick = (e) => {
         if (type === 'word') {
             onWordClick(word, e);
+        } else {
+            onVocabularyClick(word, e);
         }
     }
 
