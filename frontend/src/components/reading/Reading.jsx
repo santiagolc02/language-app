@@ -7,18 +7,20 @@ import axios from 'axios';
 import Word from '../word/Word';
 import WordTooltip from '../wordToolTip/WordTooltip';
 import Tabs from '../tabs/Tabs';
+import { motion } from 'framer-motion';
 
 const Reading = () => {
-    const [selectedWord, setSelectedWord] = useState(null);
+    const [selectedWord, setSelectedWord] = useState(String);
     const [selectedGender, setSelectedGender] = useState("None");
     const [selectedMastery, setSelectedMastery] = useState("Beginner");
     const [selectedType, setSelectedType] = useState("Noun");
     const [englishText, setEnglishText] = useState("");
     const [spanishText, setSpanishText] = useState("");
     const [tab, setTab] = useState('vocabulary');
-    const [searchVocabText, setSearchVocabText] = useState("")
+    const [searchVocabText, setSearchVocabText] = useState("");
     const [vocabularyState, setVocabularyState] = useState("all");
     const [vocabularyWord, setVocabularyWord] = useState([]);
+    //const [toolTipWord, setToolTipWord] = useState([])
 
     const [reading, setReading] = useState({});
     const [processedText, setProcessedText] = useState([])
@@ -27,7 +29,7 @@ const Reading = () => {
 
     const [tooltip, setTooltip] = useState({
         visible: false,
-        content: selectedWord,
+        content: [],
         position: { x: 0, y: 0 },
     });
 
@@ -56,7 +58,7 @@ const Reading = () => {
 
         fetchLecture();
         fetchWords();
-    }, [lectureId, selectedWord]);
+    }, [lectureId, selectedWord, language]);
 
     useEffect(() => {
         const fetchEnums = async () => {
@@ -68,9 +70,9 @@ const Reading = () => {
                 ])
                 
                 setEnums({
-                    genders: genders.data,
-                    masteries: masteries.data,
-                    types: types.data
+                    genders: genders.data || [],
+                    masteries: masteries.data || [],
+                    types: types.data || []
                 });
             } catch (error) {
                 console.error('Error fetching the lecture:', error);
@@ -127,28 +129,26 @@ const Reading = () => {
 
     const handleWordClick = (word, e) => {
         console.log(`word, ${word}`)
+        if (!word) return; // Guard against undefined words
         const wordFound = dbWords.find(dbWord => dbWord.word === word.toLowerCase());
 
+        // Reset translation inputs
+        setEnglishText("");
+        setSpanishText("");
         // Set the selected word state
-        setSelectedWord(
-            wordFound 
-                ? { ...wordFound, word, inDatabase: true } 
-                : { word, inDatabase: false }
-        );
-
-        // Get the clicked word's position
-        const rect = e.target.getBoundingClientRect();
-        // Set the tooltip state
-        setTooltip({
-            visible: !tooltip.visible,
-            content: wordFound 
-                ? { ...wordFound, word, inDatabase: true } 
-                : { word, inDatabase: false },
-            position: {
-                x: rect.right + window.scrollX + 2,  // Horizontal position (with scroll offset)
-                y: rect.bottom + window.scrollY - 60 // Vertical position (below the word, with scroll offset)
-            },
-        });
+        if (wordFound) {
+            const rect = e.target.getBoundingClientRect();
+            setTooltip({
+                visible: !tooltip.visible,
+                content: wordFound,
+                position: {
+                    x: rect.right + window.scrollX + 2,  // Horizontal position (with scroll offset)
+                    y: rect.bottom + window.scrollY - 60 // Vertical position (below the word, with scroll offset)
+                },
+            });
+        } else {
+            setSelectedWord(word)
+        }
     }
 
     const handleVocabularyClick = (word, e) => {
@@ -167,19 +167,46 @@ const Reading = () => {
         }
     };
 
+    const handleEditClick = () => {
+        const newWord = window.prompt("Enter new word:", selectedWord);
+    
+        if (!newWord || newWord.trim() === '') {
+            alert("Word cannot be empty!");
+            return;
+        }
+    
+        const wordExists = dbWords.find(
+            dbWord => dbWord.word.toLowerCase() === newWord.toLowerCase()
+        );
+    
+        if (wordExists) {
+            alert("This word already exists!");
+            return;
+        } else {
+            setSelectedWord(newWord);
+        }
+    
+        console.log(`The new word is: ${newWord}`);
+    };
+
     const filteredVocabulary = dbWords.filter(word =>
         word.word.toLowerCase().includes(searchVocabText)
     );
 
     const handleWordRegistration = async() => {
         try {
+            if (!selectedWord) {
+                alert("Please select a word first.");
+                return;
+            }
+
             if (!spanishText.trim() && !englishText.trim()) {
                 alert("At least one translation (English or Spanish) must be provided.");
                 return; // Stop execution if both are empty
             }
 
             const newWord = {
-                word: selectedWord.word.toLowerCase(),
+                word: selectedWord.toLowerCase(),
                 mastery: selectedMastery,
                 translations: `{"English": "${englishText}", "Spanish": "${spanishText}"}`,
                 word_type: selectedType,
@@ -237,90 +264,98 @@ const Reading = () => {
                 </div>
             </div>
             <div className="reading-right">
-                <div className="reading-right-top">
-                    {selectedWord ? (
-                        selectedWord.inDatabase ? (
-                            <>
-                                {tooltip.visible && (
-                                    <WordTooltip
-                                        position={tooltip.position}
-                                        content={tooltip.content}
-                                        onClose={() => setTooltip({ ...tooltip, visible: false })}
-                                    />
-                                )}
-                            </>
-                        ) : (
-                            <>
-                                <div className="reading-right-word">
-                                    <h2>{selectedWord.word}</h2>
-                                </div>
-                                <div className="reading-right-selects">
-                                    <select className='reading-right-select' 
-                                    value={selectedGender} 
-                                    onChange={(e) => setSelectedGender(e.target.value)}>
-                                        {enums.genders.map((gender, index) => (
+                <div className="reading-right-top"> 
+                    {tooltip.visible && (
+                        <WordTooltip
+                            position={tooltip.position}
+                            content={tooltip.content}
+                            onClose={() => setTooltip({ ...tooltip, visible: false })}
+                        />
+                    )}
+                        <>
+                            <div className="reading-right-word">
+                            {selectedWord ? (
+                                    <h2>{selectedWord}</h2>
+                            ) : (
+                                <h2>No word selected</h2>
+                            )}
+                            </div>
+                            <div className="reading-right-selects">
+                                <select className='reading-right-select' 
+                                value={selectedGender} 
+                                onChange={(e) => setSelectedGender(e.target.value)}>
+                                    {enums.genders && enums.genders.length > 0 ? (
+                                        enums.genders.map((gender, index) => (
                                             <option key={index} value={gender.enumlabel}>
                                                 {gender.enumlabel}
                                             </option>
-                                        ))}
-                                    </select>
-                                    <select className='reading-right-select' 
-                                    value={selectedMastery} 
-                                    onChange={(e) => setSelectedMastery(e.target.value)}>
-                                        {enums.masteries.map((mastery, index) => (
+                                        ))
+                                    ) : (
+                                        <option value="">Loading...</option>
+                                    )}
+                                </select>
+                                <select className='reading-right-select' 
+                                value={selectedMastery} 
+                                onChange={(e) => setSelectedMastery(e.target.value)}>
+                                    {enums.masteries && enums.masteries.length > 0 ? (
+                                        enums.masteries.map((mastery, index) => (
                                             <option key={index} value={mastery.enumlabel}>
                                                 {mastery.enumlabel}
                                             </option>
-                                        ))}
-                                    </select>
-                                    <select className='reading-right-select' 
-                                    value={selectedType} 
-                                    onChange={(e) => setSelectedType(e.target.value)}>
-                                        {enums.types.map((type, index) => (
+                                        ))
+                                        ) : (
+                                            <option value="">Loading...</option>
+                                        )}
+                                </select>
+                                <select className='reading-right-select' 
+                                value={selectedType} 
+                                onChange={(e) => setSelectedType(e.target.value)}>
+                                    {enums.types && enums.types.length > 0 ? (
+                                        enums.types.map((type, index) => (
                                             <option key={index} value={type.enumlabel}>
                                                 {type.enumlabel}
                                             </option>
-                                        ))}
-                                    </select>
+                                        ))
+                                        ) : (
+                                            <option value="">Loading...</option>
+                                            )}
+                                </select>
+                            </div>
+                            <div className="reading-right-translations">
+                                <div className="reading-right-translation">
+                                    <input
+                                        id="englishText"
+                                        className="reading-right-translation-input"
+                                        value={englishText}
+                                        onChange={(e) => setEnglishText(e.target.value)}
+                                        placeholder=" " /* Required for :not(:placeholder-shown) */
+                                        autoComplete='off'
+                                        required
+                                    />
+                                    <label className="reading-right-translation-label">English:</label>
                                 </div>
-                                <div className="reading-right-translations">
-                                    <div className="reading-right-translation">
-                                        <input
-                                            id="englishText"
-                                            className="reading-right-translation-input"
-                                            value={englishText}
-                                            onChange={(e) => setEnglishText(e.target.value)}
-                                            placeholder=" " /* Required for :not(:placeholder-shown) */
-                                            autoComplete='off'
-                                            required
-                                        />
-                                        <label className="reading-right-translation-label">English:</label>
-                                    </div>
-                                    <div className="reading-right-translation">
-                                        <input
-                                            id="spanishText"
-                                            className="reading-right-translation-input"
-                                            value={spanishText}
-                                            onChange={(e) => setSpanishText(e.target.value)}
-                                            placeholder=" " /* Required for :not(:placeholder-shown) */
-                                            autoComplete='off'
-                                            required
-                                        />
-                                        <label className="reading-right-translation-label">Spanish:</label>
-                                    </div>
+                                <div className="reading-right-translation">
+                                    <input
+                                        id="spanishText"
+                                        className="reading-right-translation-input"
+                                        value={spanishText}
+                                        onChange={(e) => setSpanishText(e.target.value)}
+                                        placeholder=" " /* Required for :not(:placeholder-shown) */
+                                        autoComplete='off'
+                                        required
+                                    />
+                                    <label className="reading-right-translation-label">Spanish:</label>
                                 </div>
-                                <div className="reading-right-submit">
-                                    <button className='reading-right-submit-button' onClick={handleWordRegistration}>
-                                        Upload word
-                                    </button>
-                                </div>
-                            </>
-                        )
-                    ) : (
-                        <>
-                            <h3>Select a word to see details</h3>
+                            </div>
+                            <div className="reading-right-submit">
+                                <button className='reading-right-submit-button' onClick={handleEditClick}>
+                                    Edit Word
+                                </button>
+                                <button className='reading-right-submit-button' onClick={handleWordRegistration}>
+                                    Upload word
+                                </button>
+                            </div>
                         </>
-                    )}
                 </div>
                 <div className="reading-right-middle">
                     {reading.video_url ? (
@@ -344,27 +379,30 @@ const Reading = () => {
                     {tab === 'vocabulary' ? (
                         <div className="reading-right-buttom-vocabulary">
                             {vocabularyState === 'all' ? (
-                                <>
-                                    <input
-                                        className='input-vocabulary'
-                                        placeholder='Search'
-                                        value={searchVocabText}
-                                        onChange={(e) => setSearchVocabText(e.target.value)}>
-                                    </input>
-                                    <div className="reading-right-button-words">
-                                        {filteredVocabulary.map((item, index) => (
-                                            <Word 
-                                            key={index}
-                                            word={item.word} 
-                                            type={item.word_type} 
-                                            onWordClick={(word, e) => handleWordClick(word, e)} 
-                                            onVocabularyClick={(word, e) => handleVocabularyClick(word, e)}
-                                            dbWords={dbWords} />
-                                        ))}
-                                    </div>
-                                </>
+                                <motion.div key="all" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}
+                                className='reading-right-button-input-vocab'>
+                                    <>
+                                        <input
+                                            className='input-vocabulary'
+                                            placeholder='Search'
+                                            value={searchVocabText}
+                                            onChange={(e) => setSearchVocabText(e.target.value)}>
+                                        </input>
+                                        <div className="reading-right-button-words">
+                                            {filteredVocabulary.map((item, index) => (
+                                                <Word 
+                                                key={index}
+                                                word={item.word}
+                                                type={item.word_type} 
+                                                onWordClick={(word, e) => handleWordClick(word, e)} 
+                                                onVocabularyClick={(word, e) => handleVocabularyClick(word, e)}
+                                                dbWords={dbWords} />
+                                            ))}
+                                        </div>
+                                    </>
+                                </motion.div>
                                 ) : (
-                                    <div className='reading-right-button-word'>
+                                    <motion.div className='reading-right-button-word' key="word" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
                                         <div className="reading-right-button-word-title">
                                             <i class="bi bi-arrow-left" onClick={() => setVocabularyState('all')}></i>
                                             <h2>{vocabularyWord.word}</h2>
@@ -375,10 +413,11 @@ const Reading = () => {
                                             <p>{`English: ${vocabularyWord.translations.English}`}</p>
                                             <p>{`Spanish: ${vocabularyWord.translations.Spanish}`}</p>
                                         </div>
-                                    </div>
+                                    </motion.div>
                                     )}
                         </div>
                     ) : (
+                        
                         <div className="reading-right-buttom-add">
                         </div>
                     )}

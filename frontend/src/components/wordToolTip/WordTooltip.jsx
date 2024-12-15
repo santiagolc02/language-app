@@ -25,7 +25,11 @@ const Tooltip = ({ position, content, onClose }) => {
                     onMouseDown={(e) => e.stopPropagation()}>
                     <div className="tooltip-content">
                         <>
-                            <h2>{content.word}</h2>
+                            {content.word_type === "Noun" ? (
+                                <h2>{content.word.charAt(0).toUpperCase() + content.word.slice(1)}</h2>
+                            ) : (
+                                <h2>{content.word}</h2>
+                            )}
                             <br />
                             <p><strong>Spanish:</strong> {Spanish}</p>
                             <p><strong>English:</strong> {English}</p>
