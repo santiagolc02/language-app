@@ -1,0 +1,49 @@
+.flashcards {
+    width: 100%;
+    height: calc(78vh - 1.2rem);
+    /* background-color: green; */
+    border: 1px solid rgb(238, 50, 50);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+  
+.checkbox-label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+  
+.peer {
+    display: none;
+}
+  
+.checkbox {
+    height: 20px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #a2a1a833;
+    border-radius: 4px;
+    background-color: #e8e8e8;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+  
+.checkbox.checked {
+    background-color: #3118d2;
+}
+  
+.icon {
+    width: 20px;
+    height: 20px;
+    stroke: #e8e8e8;
+}

@@ -18,6 +18,8 @@ const Navbar = ({ libraryState, setLibraryState }) => {
                 onClick={() => setLibraryState('lectures')}>Lectures</button>
                 <button className={`${libraryState === 'vocabulary' ? 'navbar-button-selected' : 'navbar-button'}`} 
                 onClick={() => setLibraryState('vocabulary')}>Vocabulary</button>
+                <button className={`${libraryState === 'flashcards' ? 'navbar-button-selected' : 'navbar-button'}`} 
+                onClick={() => setLibraryState('flashcards')}>Flashcards</button>
             </div>
             <img src={`/assets/${language}.png`} 
             className='navbar-flag' alt={`${language}`} 

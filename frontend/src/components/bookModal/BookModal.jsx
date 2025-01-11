@@ -87,8 +87,8 @@ const BookModal = ({ updateLectures }) => {
                     <label className='book-modal-label'>Level</label>
                     <select className='book-modal-select' value={lectureLevel} onChange={(e) => setLectureLevel(e.target.value)}>
                         {levels.map((level, index) => (
-                            <option key={index} value={level.enumlabel} className='book-modal-select-text'>
-                                {level.enumlabel}
+                            <option key={index} value={level} className='book-modal-select-text'>
+                                {level}
                             </option>
                         ))}
                     </select>

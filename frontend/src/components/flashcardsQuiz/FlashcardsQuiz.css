@@ -1,0 +1,86 @@
+.flashcards-quiz {
+    width: 100%;
+    height: calc(78vh - 1.2rem);
+    /* background-color: green; */
+    /* border: 1px solid rgb(80, 15, 201); */
+}
+
+.flashcards-quiz-progressbar-div {
+    width: 100%;
+    height: 15%;
+    /* background-color: rgb(97, 49, 90); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flashcards-quiz-progressbar-whole {
+    width: 50%;
+    height: 20%;
+    border-radius: 5px;
+    background-color: rgb(75, 75, 75);
+}
+
+.flashcards-quiz-progressbar-progress {
+    height: 100%;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    transition: 0.2s ease;
+}
+
+.flashcards-quiz-flashcard-div {
+    width: 100%;
+    height: 65%;
+    /* background-color: blue; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flashcards-quiz-arrows-div {
+    width: 100%;
+    height: 20%;
+    /* background-color: red; */
+    display: flex;
+    justify-content: center;
+}
+
+.flashcards-quiz-arrows-numbers {
+    width: 50%;
+    height: 50%;
+    /* background-color: rgb(70, 70, 70); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flashcards-quiz-arrow {
+    width: 10%;
+    height: 80%;
+    /* background-color: rgb(67, 79, 138); */
+    border-radius: 10px;
+    /* border: 1px solid white; */
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s ease;
+}
+
+.flashcards-quiz-arrow:hover i {
+    color: white;
+}
+
+.flashcards-quiz-fraction {
+    width: 20%;
+    height: 100%;
+    /* background-color: purple; */
+    display: flex; /* Enables flexbox */
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+}
+
+h1 {
+    margin: 0; /* Removes default margin */
+    padding: 0; /* Ensures no padding */
+}

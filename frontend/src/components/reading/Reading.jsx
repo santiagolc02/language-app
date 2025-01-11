@@ -20,8 +20,6 @@ const Reading = () => {
     const [searchVocabText, setSearchVocabText] = useState("");
     const [vocabularyState, setVocabularyState] = useState("all");
     const [vocabularyWord, setVocabularyWord] = useState([]);
-    //const [toolTipWord, setToolTipWord] = useState([])
-
     const [reading, setReading] = useState({});
     const [processedText, setProcessedText] = useState([])
     const [dbWords, setDbWords] = useState([]);
@@ -132,9 +130,6 @@ const Reading = () => {
         if (!word) return; // Guard against undefined words
         const wordFound = dbWords.find(dbWord => dbWord.word === word.toLowerCase());
 
-        // Reset translation inputs
-        setEnglishText("");
-        setSpanishText("");
         // Set the selected word state
         if (wordFound) {
             const rect = e.target.getBoundingClientRect();
@@ -148,6 +143,9 @@ const Reading = () => {
             });
         } else {
             setSelectedWord(word)
+            // Reset translation inputs
+            setEnglishText("");
+            setSpanishText("");
         }
     }
 
@@ -286,8 +284,8 @@ const Reading = () => {
                                 onChange={(e) => setSelectedGender(e.target.value)}>
                                     {enums.genders && enums.genders.length > 0 ? (
                                         enums.genders.map((gender, index) => (
-                                            <option key={index} value={gender.enumlabel}>
-                                                {gender.enumlabel}
+                                            <option key={index} value={gender}>
+                                                {gender}
                                             </option>
                                         ))
                                     ) : (
@@ -299,8 +297,8 @@ const Reading = () => {
                                 onChange={(e) => setSelectedMastery(e.target.value)}>
                                     {enums.masteries && enums.masteries.length > 0 ? (
                                         enums.masteries.map((mastery, index) => (
-                                            <option key={index} value={mastery.enumlabel}>
-                                                {mastery.enumlabel}
+                                            <option key={index} value={mastery}>
+                                                {mastery}
                                             </option>
                                         ))
                                         ) : (
@@ -312,8 +310,8 @@ const Reading = () => {
                                 onChange={(e) => setSelectedType(e.target.value)}>
                                     {enums.types && enums.types.length > 0 ? (
                                         enums.types.map((type, index) => (
-                                            <option key={index} value={type.enumlabel}>
-                                                {type.enumlabel}
+                                            <option key={index} value={type}>
+                                                {type}
                                             </option>
                                         ))
                                         ) : (
